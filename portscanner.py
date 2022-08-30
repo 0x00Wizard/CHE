@@ -28,5 +28,12 @@ class Scanner:
         with open(filepath, "w") as f:
             f.write('\n'.join(openport))
 
+def main():
+    ip = "localhost"
+    scanner = Scanner(ip)
+    scanner.scan(1, 65000)
+    scanner.write("./open_ports")
 
 
+if __name__ == "__main__":
+    main()
