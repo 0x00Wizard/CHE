@@ -6,6 +6,7 @@ class Grabber:
         self.ip = ip
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.settimeout(1000)
         self.socket.connect((self.socket, self.port))
 
     def read(self, length=1024):

@@ -28,6 +28,7 @@ class Scanner:
         with open(filepath, "w") as f:
             f.write('\n'.join(openport))
 
+
 def main():
     ip = "localhost"
     scanner = Scanner(ip)
