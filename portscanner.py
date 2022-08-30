@@ -20,3 +20,13 @@ class Scanner:
     def is_open(self, port):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = s.connect_ex((self.ip, port))
+        s.close()
+        return result == 0
+
+    def write(self, filepath):
+        openport = map(str, self.open_ports)
+        with open(filepath, "w") as f:
+            f.write('\n'.join(openport))
+
+
+
