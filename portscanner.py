@@ -1,13 +1,14 @@
 import socket
+from utils import timefunc
 
 
 class Scanner:
-    def __int__(self, ip):
+    def __init__(self, ip):
         self.ip = ip
-        self.open_ports = []
+        self.open_ports = [];
 
     def __repr__(self):
-        return f'Scanner: {self.ip}'
+        return 'Scanner: {}'.format(self.ip)
 
     def add_port(self, port):
         self.open_ports.append(port)
@@ -25,16 +26,18 @@ class Scanner:
 
     def write(self, filepath):
         openport = map(str, self.open_ports)
-        with open(filepath, "w") as f:
+        with open(filepath, 'w') as f:
             f.write('\n'.join(openport))
 
 
+@timefunc
 def main():
-    ip = "localhost"
+    ip = '10.0.13.231'
     scanner = Scanner(ip)
     scanner.scan(1, 65000)
-    scanner.write("./open_ports")
+    scanner.write('./open_ports')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
+
