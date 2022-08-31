@@ -1,5 +1,5 @@
 from utils import timefunc
-from port_scanner import Scanner
+from portscanner import Scanner
 from grabber import Grabber
 
 
