@@ -1,13 +1,15 @@
+from utils import timefunc
+
 import socket
 
 
 class Grabber:
-    def __int__(self, ip, port):
+    def __init__(self, ip, port):
         self.ip = ip
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.settimeout(0.3)
-        self.socket.connect((self.socket, self.port))
+        self.socket.connect((self.ip, self.port))
 
     def read(self, length=1024):
         return self.socket.recv(length)
@@ -17,7 +19,7 @@ class Grabber:
 
 
 def main():
-    grabber = Grabber("placeholder", "port")
+    grabber = Grabber('10.0.13.231', 22)
     print(grabber.read())
     grabber.close()
 
