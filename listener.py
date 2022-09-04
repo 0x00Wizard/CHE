@@ -22,3 +22,6 @@ class Listener:
             command = input(">> ")
             result = self.execute_remotely(command)
             print(result)
+
+
+my_listener = Listener("localhost", 4444)
