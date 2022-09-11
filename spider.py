@@ -17,10 +17,10 @@ def extract_link(url):
 
     for link in links:
         joined_links = urljoin(TARGET_URL, link.get("href"))
-        link_text = [new_item for item in joined_links if TARGET_URL in link and link not in TARGET_URL]
+        link_text = [new_item for link in joined_links if TARGET_URL in link and link not in TARGET_URL]
 
-        if TARGET_URL in link and link not in TARGET_URL:
-            print(link)
+        # if TARGET_URL in link and link not in TARGET_URL:
+        #     print(link)
 
 
 extract_link(TARGET_URL)
