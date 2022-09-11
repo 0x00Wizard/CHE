@@ -23,7 +23,7 @@ def request(url):
 with open("files-and-dirs-wordlist.txt", "r") as wordlist_file:
     words = [line.strip() for line in wordlist_file]
     for word in words:
-        test_url = f"{word}.{URL}"
+        test_url = f"{URL}/{word}"
         response = request(test_url)
         if response:
-            print(f"[+] Discovered subdomain --> {test_url}")
+            print(f"[+] Discovered URL --> {test_url}")
