@@ -3,9 +3,6 @@ import requests, argparse
 
 URL = "google.com"
 
-parser = argparse.ArgumentParser(description='To find subdomain')
-parser.add_argument('--domain', dest='accumulate', help='[+] write domain google.com')
-
 
 def request(url):
     try:
@@ -15,7 +12,7 @@ def request(url):
         pass
 
 
-def get_subdomain():
+def get_subdomain(domain):
     with open("subdomains-wodlist.txt", "r") as wordlist_file:
         words = [line.strip() for line in wordlist_file]
         for word in words:
@@ -28,6 +25,11 @@ def get_subdomain():
 
 get_subdomain()
 
+
+parser = argparse.ArgumentParser(description='To find subdomain')
+parser.add_argument('-d', '--domain', dest='accumulate', help='[+] write domain google.com')
+
+option, argparse = parser.parse_args()
 
 # with open("files-and-dirs-wordlist.txt", "r") as wordlist_file:
 #     words = [line.strip() for line in wordlist_file]
