@@ -2,6 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
 
 def request(url):
@@ -21,8 +22,23 @@ form_list = html_response.find_all("form")
 
 for form in form_list:
     action = form.get("action")
+    post_url = urljoin(target_url, action)
+    print(post_url)
     method = form.get("method")
-    input_name = [item.get("name") for item in form.find_all("input")]
-    print(input_name)
+    # input_name = [item.get("name") for item in form.find_all("input")]
+    inputs_list = form.find_all("input")
+    post_data = {}
+    for inputs in inputs_list:
+        input_name = inputs.get("name")
+        input_type = inputs.get("type")
+        input_value = inputs.get("value")
+        if input_type == "text":
+            input_value = "text"
+
+        post_data[input_name] = input_value
+    result = requests.post(url=target_url, data=post_data)
+    print(result.text)
+
+
 
 
