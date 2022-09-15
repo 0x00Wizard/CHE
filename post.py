@@ -2,7 +2,7 @@
 
 import requests
 
-target_url = "http://testphp.vulnweb.com/login.php"
+target_url = "localhost"
 
 data_dict = {
     "uname": "test",
