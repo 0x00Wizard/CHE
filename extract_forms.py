@@ -15,6 +15,14 @@ target_url = "http://128.198.49.198:8102/mutillidae/index.php?page=dns-lookup.ph
 
 response = request(target_url)
 
-soup = BeautifulSoup(response.text, "html.parser")
+html_response = BeautifulSoup(response.text, "html.parser")
 
-print(soup.prettify())
+form_list = html_response.find_all("form")
+
+for form in form_list:
+    action = form.get("action")
+    method = form.get("method")
+    input_name = [item.get("name") for item in form.find_all("input")]
+    print(input_name)
+
+
