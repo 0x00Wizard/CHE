@@ -61,7 +61,7 @@ class Scanner:
                 print(f"[+] Testing form in {form}")
 
     def test_xss_in_form(self, form, url):
-        xss_test_script = "<script> alert('test') </script>"
+        xss_test_script = "<sCript> alert('test') </scriPt>"
         response = self.submit_form(form, xss_test_script, url)
         if xss_test_script in response.text:
             return True
