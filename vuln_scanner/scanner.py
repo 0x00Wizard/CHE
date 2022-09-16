@@ -60,6 +60,10 @@ class Scanner:
             for form in forms:
                 print(f"[+] Testing form in {form}")
 
+    def test_xss_in_link(self, url):
+        xss_test_script = "<sCript> alert('test') </scriPt>"
+        url = url.replace("=", f"={xss_test_script}")
+
     def test_xss_in_form(self, form, url):
         xss_test_script = "<sCript> alert('test') </scriPt>"
         response = self.submit_form(form, xss_test_script, url)
