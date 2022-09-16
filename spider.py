@@ -1,26 +1,22 @@
 #!/usr/bin/env python3
 
 import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urlparse, urljoin
+import re
+from urllib.parse import urljoin
 
-target_url = "localhost"
+target_url = "https://zsecurity.org"
 target_links = []
 
 
 def extract_link(url):
-    response = requests.get(url=url)
-    data = response.text
-
-    soup = BeautifulSoup(data, "html.parser")
-    return soup.find_all("a")
-    # links = [link.get("href") for link in soup.find_all("a")]
+    response = requests.get(url)
+    return re.findall('(?:href=")(.*?)"', response.text)
 
 
 def crawl(url):
     href_links = extract_link(url)
     for link in href_links:
-        link = urljoin(target_url, link.get("href"))
+        link = urljoin(target_url, link)
         if "#" in link:
             link = link.split("#")[0]
 
@@ -31,4 +27,3 @@ def crawl(url):
 
 
 crawl(target_url)
-
