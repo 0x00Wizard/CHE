@@ -4,6 +4,6 @@ import scanner
 
 target_url = "https://zsecurity.org/"
 
-vuln_scanner = scanner.Scanner()
+vuln_scanner = scanner.Scanner(target_url)
 
-vuln_scanner.crawl(target_url)
+vuln_scanner.crawl()
